@@ -51,3 +51,45 @@ export interface FormatResult {
   /** Unit used in the formatted output. */
   readonly unit: string;
 }
+
+// --- v0.2.0: Transfer Time, Storage Compare, Bit-Rate ---
+
+/** Result from transfer time estimation. */
+export interface TransferTimeResult {
+  /** Total seconds for the transfer. */
+  readonly seconds: number;
+  /** Human-readable duration string (e.g., "2m 30s"). */
+  readonly display: string;
+  /** File size in bytes. */
+  readonly bytes: number;
+  /** Speed in bits per second. */
+  readonly bitsPerSecond: number;
+}
+
+/** A named storage item for comparison. */
+export interface StorageItem {
+  /** Label (e.g., "DVD", "Blu-ray"). */
+  readonly label: string;
+  /** Size in bytes. */
+  readonly bytes: number;
+}
+
+/** Result from storage comparison. */
+export interface StorageCompareResult {
+  /** Sorted items with bar visualization. */
+  readonly items: readonly { label: string; bytes: number; formatted: string; bar: string; percent: number }[];
+  /** Full text display. */
+  readonly display: string;
+}
+
+/** Result from bit-rate formatting. */
+export interface BitRateResult {
+  /** Human-readable bit rate (e.g., "100 Mbps"). */
+  readonly formatted: string;
+  /** Equivalent bytes per second formatted. */
+  readonly bytesPerSecond: string;
+  /** Raw bits per second. */
+  readonly bitsPerSecond: number;
+  /** Raw bytes per second. */
+  readonly rawBytesPerSecond: number;
+}
