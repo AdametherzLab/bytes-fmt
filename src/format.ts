@@ -56,16 +56,17 @@ export function formatBytes(
   let precision = options?.precision ?? 1;
   let system: UnitSystem = options?.unitSystem ?? 'si';
   const separator = options?.separator ?? ' ';
+  const customUnits = options?.customUnits;
 
   if (precision < 0 || !Number.isInteger(precision)) {
     throw new RangeError(`precision must be a non-negative integer, got: ${precision}`);
   }
 
-  if (system !== 'si' && system !== 'iec') {
+  if (system !== 'si' && system !== 'iec' && !customUnits) {
     throw new TypeError(`unitSystem must be 'si' or 'iec', got: ${String(system)}`);
   }
 
-  const units = system === 'si' ? UNIT_TABLE.si : UNIT_TABLE.iec;
+  const units = customUnits ?? (system === 'si' ? UNIT_TABLE.si : UNIT_TABLE.iec);
   const isNegative = bytes < 0;
   const absBytes = Math.abs(bytes);
 

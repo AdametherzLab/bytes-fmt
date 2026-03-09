@@ -26,6 +26,8 @@ export interface FormatOptions {
   readonly unitSystem?: UnitSystem;
   /** Separator between value and unit (default: " "). */
   readonly separator?: string;
+  /** Custom unit definitions. Overrides unitSystem if provided. */
+  readonly customUnits?: readonly UnitEntry[];
 }
 
 /**
