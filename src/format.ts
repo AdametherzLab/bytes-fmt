@@ -31,8 +31,6 @@ const IEC_UNITS = [
   { symbol: 'EiB', base: 1024, exponent: 6 },
 ] satisfies readonly UnitEntry[];
 
-const UNIT_TABLE = { si: SI_UNITS, iec: IEC_UNITS };
-
 /**
  * Format bytes to a human-readable string using SI or IEC units.
  * @param bytes - The number of bytes to format
@@ -63,10 +61,13 @@ export function formatBytes(
   }
 
   if (system !== 'si' && system !== 'iec' && !customUnits) {
-    throw new TypeError(`unitSystem must be 'si' or 'iec', got: ${String(system)}`);
+    throw new TypeError(
+      `unitSystem must be 'si' or 'iec' when no customUnits are provided. Received: '${system}'. ` +
+      'To use a custom unit system, provide customUnits along with the desired unitSystem name.'
+    );
   }
 
-  const units = customUnits ?? (system === 'si' ? UNIT_TABLE.si : UNIT_TABLE.iec);
+  const units = customUnits ?? (system === 'si' ? SI_UNITS : IEC_UNITS);
   const isNegative = bytes < 0;
   const absBytes = Math.abs(bytes);
 
