@@ -10,7 +10,7 @@ export interface UnitEntry {
   readonly symbol: string;
   /** Base value (1000 for SI, 1024 for IEC). */
   readonly base: number;
-  /** Power of the unit (1 = killo, 2 = mega, etc.). */
+  /** Power of the unit (1 = kilo, 2 = mega, etc.). */
   readonly exponent: number;
 }
 

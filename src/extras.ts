@@ -62,7 +62,7 @@ export function storageCompare(items: readonly StorageItem[], barWidth: number =
   const mapped = items.map(item => {
     const percent = maxBytes === 0 ? 0 : Math.round((item.bytes / maxBytes) * 100);
     const barLen = maxBytes === 0 ? 0 : Math.round((item.bytes / maxBytes) * barWidth);
-    const bar = '█'.repeat(barLen) + '░'.repeat(Math.max(0, barWidth - barLen));
+    const bar = '\u2588'.repeat(barLen) + '\u2591'.repeat(Math.max(0, barWidth - barLen));
     const formatted = formatString(item.bytes);
     return { label: item.label, bytes: item.bytes, formatted, bar, percent };
   });
@@ -135,7 +135,7 @@ export function formatBitRate(bitsPerSecond: number, precision: number = 1): Bit
   const scaled = bitsPerSecond / selected.factor;
   const factor = 10 ** precision;
   const rounded = Math.round(scaled * factor) / factor;
-  let numStr = rounded.toFixed(precision).replace(/(\.\d*?)(0+)$/, '$1').replace(/\.$/, '');
+  let numStr = rounded.toFixed(precision).replace(/(\.\.d*?)(0+)$/, '$1').replace(/\.$/, '');
 
   const rawBytesPerSecond = bitsPerSecond / 8;
   const bytesPerSecond = formatString(rawBytesPerSecond, { precision }) + '/s';

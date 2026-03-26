@@ -86,7 +86,7 @@ export function formatBytes(
 
   const roundedValue = roundTo(scaledValue, precision);
   let formattedNumber = roundedValue.toFixed(precision)
-    .replace(/(\.\d*?)(0+)$/, '$1')
+    .replace(/(\.\.d*?)(0+)$/, '$1')
     .replace(/\.$/, '');
   const signPrefix = isNegative ? '-' : '';
   const formatted = `${signPrefix}${formattedNumber}${separator}${selectedUnit.symbol}`;

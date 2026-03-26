@@ -357,3 +357,33 @@ describe("SIZE_PRESETS", () => {
     expect(SIZE_PRESETS['ssd1tb']).toBe(1_000_000_000_000);
   });
 });
+
+describe("version bump v0.4.2", () => {
+  it("exports all core formatting functions", () => {
+    expect(typeof formatBytes).toBe("function");
+    expect(typeof formatString).toBe("function");
+    expect(typeof parseBytes).toBe("function");
+  });
+
+  it("exports all utility functions and constants", () => {
+    expect(typeof roundTo).toBe("function");
+    expect(typeof getUnitEntry).toBe("function");
+    expect(Array.isArray(UNIT_TABLE)).toBe(true);
+  });
+
+  it("exports all extras functions and presets", () => {
+    expect(typeof transferTime).toBe("function");
+    expect(typeof storageCompare).toBe("function");
+    expect(typeof formatBitRate).toBe("function");
+    expect(typeof parseSpeed).toBe("function");
+    expect(SPEED_PRESETS).toBeDefined();
+    expect(SIZE_PRESETS).toBeDefined();
+  });
+
+  it("round-trips format and parse correctly", () => {
+    const original = 2_500_000;
+    const formatted = formatString(original);
+    const parsed = parseBytes(formatted);
+    expect(parsed.value).toBe(original);
+  });
+});
