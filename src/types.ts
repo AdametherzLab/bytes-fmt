@@ -1,5 +1,5 @@
 /** Unit system identifiers. */
-export type UnitSystem = 'si' | 'iec';
+export type UnitSystem = 'si' | 'iec' | string;
 
 /**
  * Entry in the unit lookup table.
@@ -17,16 +17,31 @@ export interface UnitEntry {
 /**
  * Configuration options for byte formatting.
  * @example
- * const opts: FormatOptions = { precision: 2, unitSystem: "iec", separator: " " };
+ * // Using SI units
+ * const opts: FormatOptions = { precision: 2, unitSystem: "si" };
+ * // Using custom units
+ * const customOptions: FormatOptions = {
+ *   unitSystem: "custom",
+ *   customUnits: [
+ *     { symbol: "Foo", base: 1000, exponent: 1 },
+ *     { symbol: "Bar", base: 1000, exponent: 2 },
+ *   ],
+ * };
  */
 export interface FormatOptions {
   /** Number of decimal places (default: 1). */
   readonly precision?: number;
-  /** Unit system to use (default: "si"). */
+  /**
+   * Unit system to use. Defaults to 'si'.
+   * Can be 'si', 'iec', or a custom system name if customUnits are provided.
+   */
   readonly unitSystem?: UnitSystem;
   /** Separator between value and unit (default: " "). */
   readonly separator?: string;
-  /** Custom unit definitions. Overrides unitSystem if provided. */
+  /**
+   * Custom unit definitions. Overrides unitSystem if provided.
+   * Required if unitSystem is a custom name.
+   */
   readonly customUnits?: readonly UnitEntry[];
 }
 

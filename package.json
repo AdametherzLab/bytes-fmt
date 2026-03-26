@@ -1,6 +1,6 @@
 {
   "name": "@adametherzlab/bytes-fmt",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Byte size toolkit — format, parse, transfer time estimation, storage comparison, bit-rate formatting with SI and IEC units",
   "type": "module",
   "main": "./dist/index.js",
